@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <style>
+       .box{
+        display: flex;
+        width:200px ;
+        height:200px ;
+        background-color: {{ box_color }};
+        
+    }
+    .contain{
+        display: flex;
+        align-items: center;
+        justify-content: space-around; 
+        margin: 50px 300px 20px 300px;
+    }
+    </style>
+</head>
+<body>
+    <h1  style="text-align: center;" >Welcome!</h1>
+    {% for _ in range(num_box) %}
+    <div class="contain" >
+        <div class="box"></div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
