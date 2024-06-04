@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/my_style.css') }}">
+</head>
+<body>
+    <h3>My Flask Template</h3>
+    <p>Phrase: {{ phrase }}</p>
+    <p>Times: {{ times }}</p>
+    <button onclick="here(this)">click here</button>
+          
+    {% for x in range(0,times): %}
+        <p>{{ phrase }}</p>
+    {% endfor %}
+          
+    {% if phrase == "hello" %}
+    <p>The phrase says hello</p>
+    {% endif %}
+
+
+
+    <h1>Random Numbers</h1>
+    {% for num in random_numbers %}
+        <p>{{ num }}</p>
+    {% endfor %}
+
+    <h1>Students</h1>
+    {% for student in students %}
+
+        <p>{{ student['name'] }} - {{student['age']}} </p>
+
+   {% endfor %}
+    
+    <script type="text/javascript" src="{{ url_for('static',filename='js/javascript.js') }}"></script>
+</body>
+</html>
