@@ -14,8 +14,6 @@ def dojo():
     print(f"location submitted :  {request.form['loc']}")
     print(f"language submitted :  {request.form['lang']}")
     print(f"comment submitted :  {request.form['com']}")
-    
-  
 
     return render_template("info.html" ,name =request.form['name'] ,location = request.form['loc'] 
                            , language = request.form['lang'],
