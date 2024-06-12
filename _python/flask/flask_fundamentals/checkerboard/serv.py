@@ -1,5 +1,6 @@
 from flask import Flask , render_template
 app = Flask(__name__)
+
 @app.route("/")
 def check1(i=8,j=8):
     num_box = int(i)
