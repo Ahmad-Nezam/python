@@ -1,9 +1,11 @@
-from flask import Flask , render_template , request ,redirect
+from flask import Flask , render_template , request 
 app = Flask(__name__)
+
 
 @app.route("/")
 def showing():
     return render_template("index.html")
+
 
 
 @app.route('/result' , methods=['POST'])

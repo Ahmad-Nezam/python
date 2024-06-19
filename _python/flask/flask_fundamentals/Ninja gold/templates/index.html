@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold Game</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Ninja Gold Game!</h1>
+    <h3>Your Gold: {{ gold }}</h3>
+    
+    <div class="form-container"> 
+        <form action="/process_money" method="post" class="gold-form">
+            <p>Farm</p>
+            <p>(earns 10 - 20 gold)</p>
+            <input type="hidden" name="building" value="farm" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+        <form action="/process_money" method="post" class="gold-form">
+            <p>Cave</p>
+            <p>(earns 5 - 10 gold)</p>
+            <input type="hidden" name="building" value="cave" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+        <form action="/process_money" method="post" class="gold-form">
+            <p>House</p>
+            <p>(earns 2 - 5 gold)</p>
+            <input type="hidden" name="building" value="house" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+        <form action="/process_money" method="post" class="gold-form">
+            <p>Casino</p>
+            <p>(earns 0 - 50 gold)</p>
+            <input type="hidden" name="building" value="casino" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+    </div>
+    <form action="/reset" method="post" class="gold-form2">
+        <input type="submit" value="Reset Game" />
+    </form>
+    
+    <h4>Activities:</h4>
+    <div class="activities">
+        {% for activity in activities %}
+            <p>{{ activity }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

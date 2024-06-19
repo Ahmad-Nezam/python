@@ -9,7 +9,7 @@ def count1():
     else:
         session['count'] +=1
     return render_template("index.html")
-    
+
 
 @app.route("/count" , methods=["POST"])
 def count2():

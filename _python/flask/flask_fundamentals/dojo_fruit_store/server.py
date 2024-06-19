@@ -20,6 +20,7 @@ def checkout():
                              fs = request.form['first_name'], 
                              ls = request.form['last_name'],
                              idd = request.form['student_id'])
+
 @app.route('/fruits')         
 def fruits():
     return render_template("fruits.html")

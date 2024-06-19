@@ -1,0 +1,19 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.container{
+    
+    text-align: center;
+   
+}
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 15px 0px 15px 715px;
+    padding: 30px 20px 30px 25px;
+    font-size: 25px;
+}
