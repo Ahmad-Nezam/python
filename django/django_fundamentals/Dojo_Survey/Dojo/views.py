@@ -10,12 +10,12 @@ def create_user(request):
     lan_doj = request.POST['language']
     comm_doj = request.POST['comment']
     context={
-        'name_doj' :  name_doj,
-        'loc_doj' : loc_doj,
-        'lan_doj' : lan_doj,
-        'comm_doj' :comm_doj,
+        'name' :  name_doj,
+        'loc' : loc_doj,
+        'lan' : lan_doj,
+        'comm' :comm_doj
     }
-    return render(request,"show.html",context)
+    return redirect("success/")
 
 def success(request):
     return render(request,"show.html")

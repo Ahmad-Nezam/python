@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>counter</h1>
+    <h2>times {{request.session.count}}</h2>
+    <form action="/res/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="add" name="alterr">
+        <input type="submit" value="reset" name="alter">
+    </form>
+</body>
+</html>
