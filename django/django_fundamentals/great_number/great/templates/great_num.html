@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Great Number Game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+   
+    <h1>Welcome to the great number game</h1>
+    <h2>I am thinking of a number between 1 and 100 </h2>
+    <h3>Take a guess</h3>
+    <form method="post" action="{% url 'index' %}">
+
+        {% csrf_token %}
+        <input class="input" type="number" name="guess" min="1" max="100" required><br><br>
+        <button class="btn" type="submit">Guess</button>
+
+    </form><br><br>
+
+    <form action="{% url 'reset' %}">
+
+        <button class="btn" type="submit">Reset</button>
+
+    </form>
+
+        <div class="message">
+            <p> {{ message }}  </p>
+         
+
+
+        </div> 
+    
+    
+
+  
+</body>
+</html>
