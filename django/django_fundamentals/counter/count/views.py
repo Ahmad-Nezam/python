@@ -8,14 +8,17 @@ def count1(request):
    return render(request,'index.html')
 
 def count2(request):
-        if request.POST.get('alterr') == 'add':
+        if request.POST['alter'] == 'add':
             request.session['count'] += 1
-        elif request.POST.get('alter') == 'reset':
-            request.session['count'] = 0
             return redirect('/')
+        
+def count3(request):
+      if request.POST['alter'] == 'reset':
+          request.session['count'] = 0
+          return redirect('/')
 
 
 def destroy(request):
-    request.session.clear()
-    return redirect("/")        
+        request.session.clear()
+        return redirect('/')
         

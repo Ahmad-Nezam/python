@@ -2,7 +2,9 @@
 <html>
 <head>
     <title>Great Number Game</title>
+
     {% load static %}
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
 </head>
 <body>
@@ -13,6 +15,7 @@
     <form method="post" action="{% url 'index' %}">
 
         {% csrf_token %}
+
         <input class="input" type="number" name="guess" min="1" max="100" required><br><br>
         <button class="btn" type="submit">Guess</button>
 
@@ -25,14 +28,9 @@
     </form>
 
         <div class="message">
+    
             <p> {{ message }}  </p>
          
-
-
         </div> 
-    
-    
-
-  
 </body>
 </html>

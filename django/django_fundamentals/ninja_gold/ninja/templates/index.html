@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja_Gold</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <H1>Your Gold : </H1>
+    <h2>{{ gold }}</h2>
+    <div class="big-box">
+    <form class="box" action="/process_money" method="post">
+        {% csrf_token  %}
+        <h3>Farm</h3>
+        <h4>earns 10-20 gold</h4>
+        <input type="hidden" name="building" value="farm">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+    <form class="box" action="/process_money" method="post">
+        {% csrf_token  %}
+        <h3>Cave</h3>
+        <h4>earns 10-20 gold</h4>
+        <input type="hidden" name="building" value="farm">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+    <form class="box" action="/process_money" method="post">
+        {% csrf_token  %}
+        <h3>House</h3>
+        <h4>earns 10-20 gold</h4>
+        <input type="hidden" name="building" value="farm">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+
+
+    <form class="box" action="/process_money" method="post">
+        {% csrf_token  %}
+        <h3>Quest</h3>
+        <h4> 0-50 earns</h4>
+        <input type="hidden" name="building" value="quest">
+        <input type="submit" value="Find Gold!">
+        
+    </form>
+    <!-- <form action="/process_money" method="post">
+        {% csrf_token  %}
+        <input type="submit" value="clear" name="del">
+    </form> -->
+    </div>
+    <div class="activites">
+        <h1>Activites</h1>
+        {% for activity in activites %}
+        {% if 'Lost' in activity %}
+        <p style="color: red;">{{  activity }}</p>
+        {% else %}
+        <p style="color: green;">{{  activity }}</p>
+         {% endif %}
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

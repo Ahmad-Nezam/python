@@ -15,7 +15,7 @@ def create_user(request):
         'lan' : lan_doj,
         'comm' :comm_doj
     }
-    return redirect("success/")
+    return render(request,"show.html",context)
 
 def success(request):
     return render(request,"show.html")
