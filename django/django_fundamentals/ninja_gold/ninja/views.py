@@ -13,15 +13,16 @@ def index(request):
     return render(request,'index.html', ninja_dictionary)
 
 def process_money(request):
-   
-    building= request.POST.get('building') 
-    request.session['building'] = building
+    if request.method == 'POST':
+     building= request.POST.get('building') 
+     request.session['building'] = building
 
     if building == 'farm':
       earn_gold = random.randint(10,20)
     elif building == 'quest':
        earn_gold = random.randint(-50,50)
     time = datetime.now().strftime('%d%y - %H%M')
+    
     if earn_gold > 0:
        activity = f' Earned {earn_gold} from {building} on {time}' 
     else: 

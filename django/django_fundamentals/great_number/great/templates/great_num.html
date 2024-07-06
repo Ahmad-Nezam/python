@@ -20,17 +20,17 @@
         <button class="btn" type="submit">Guess</button>
 
     </form><br><br>
-
-    <form action="{% url 'reset' %}">
-
-        <button class="btn" type="submit">Reset</button>
-
-    </form>
-
-        <div class="message">
     
-            <p> {{ message }}  </p>
-         
-        </div> 
+    <form action="{% url 'reset' %}">
+        
+        <button class="btn" type="submit">Reset</button>
+        
+    </form>
+    
+    <div class="message">
+    
+        <p> {{ request.session.message }}  </p>
+     
+    </div> 
 </body>
 </html>

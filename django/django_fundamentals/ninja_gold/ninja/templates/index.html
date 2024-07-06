@@ -7,6 +7,7 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    
 </head>
 <body>
     <H1>Your Gold : </H1>
@@ -51,13 +52,14 @@
         <input type="submit" value="clear" name="del">
     </form> -->
     </div>
+    
     <div class="activites">
         <h1>Activites</h1>
         {% for activity in activites %}
         {% if 'Lost' in activity %}
-        <p style="color: red;">{{  activity }}</p>
+        <p class="lost" >{{  activity }}</p>
         {% else %}
-        <p style="color: green;">{{  activity }}</p>
+        <p class="earned" >{{  activity }}</p>
          {% endif %}
         {% endfor %}
     </div>

@@ -8,10 +8,16 @@
 <body>
     <h1>counter</h1>
     <h2>times {{request.session.count}}</h2>
-    <form action="/res/" method="post">
+    <form action="res/" method="post">
         {% csrf_token %}
         <input type="submit" value="add" name="alter">
+        
+    </form>
+
+    <form action="res2/" method="post">
+        {% csrf_token %}
         <input type="submit" value="reset" name="alter">
+       
     </form>
 </body>
 </html>

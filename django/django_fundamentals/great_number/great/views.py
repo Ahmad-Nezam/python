@@ -1,32 +1,27 @@
 from django.shortcuts import render, redirect
 import random
 def home(request):
-    random.randint(1,100)
+    if 'number' not in request.session:
+        request.session['number'] = random.randint(1,100)
+        request.session['message'] = ''
+        print(request.session['number'])
     return render(request,'great_num.html')
 
 
 def index(request):
-    if 'number' in request.session:
-        request.session['number'] = random.randint(1, 100)
-        request.session['message'] = ''
-
+    # if request.method == 'POST':
         guess = int(request.POST['guess'])
-        if guess == 55:
-
-            request.session['message'] = '55 was the number!!'
-        elif 49 < request.session['number']:
-
+        num = request.session['number']
+        if guess < num:
             request.session['message'] = 'Too low!'
-        elif 50 > request.session['number']:
+        elif guess > num:
             request.session['message'] = 'Too high!'
-            
-        else:
-            # request.session['message'] = f'Correct! The number was {request.session["number"]}. Play again?'
-            request.session.pop('number')
-    
-    return render(request, 'great_num.html', {'message': request.session.get('message', '')})
+        elif guess == num:
+            request.session['message'] = ' correct  number!!'    
+            request.session['number'] = random.randint(1,100)
+        return redirect('/')
+
 
 def reset(request):
-    request.session.pop('number', None)
-    request.session['message'] = ''
-    return redirect('index')
+    request.session.clear()
+    return redirect('/')

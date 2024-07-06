@@ -13,3 +13,9 @@
     display: flex;
     justify-content: space-between;
 }
+.lost{
+    color: red;
+}
+.earned{
+    color: green;
+}
