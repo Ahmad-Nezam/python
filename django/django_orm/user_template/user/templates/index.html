@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users with templates</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <h1>all the users</h1>
+    <table>
+      
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Age</th>
+        </tr>
+       
+        <tr>
+          {% for movie in  all_the_movies %}
+          <td>{{movie.id}} </td>
+          <td>{{movie.name}} {{movie.lstname}}</td>
+          <td>{{movie.email}}</td>
+          <td>{{movie.age}}</td>
+       
+        </tr>
+        {% endfor %}
+    <div>
+      </table>
+      <p>***********************************************</p>
+      <form method="post" action="add_user">
+        {% csrf_token %}
+        <h1>Add a User</h1>
+        First Name
+        <input type="text" id="name" name="name">
+        Email
+        <input type="text" id="email" name="email">
+        Age 
+        <input type="text" id="age" name="age">
+        <input type="submit" value="Add">
+      </form>
+    </div>
+</body>
+</html>
