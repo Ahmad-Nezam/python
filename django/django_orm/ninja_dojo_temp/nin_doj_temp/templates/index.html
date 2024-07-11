@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users with templates</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>All the Dojos</h1>
+    <ul>
+        {% for dojo in doj %}
+        <li>
+            <strong>{{ dojo.name }}</strong> - {{ dojo.city }}, {{ dojo.state }}
+            <ul>
+                {% for ninja in nin %}
+                    {% if ninja.dojo == dojo %}
+                    <li>{{ ninja.first_name }} {{ ninja.last_name }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    <div>
+        <p>***********************************************</p>
+        <form method="post" action="{% url 'add_dojo' %}">
+            {% csrf_token %}
+            <h1>Add a Dojo</h1>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+    <div>
+      
+        <p>***********************************************</p>
+        <form method="post" action="{% url 'add_ninja' %}">
+            {% csrf_token %}
+            <h1>Add a Ninja</h1>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+            <label for="dojo">Dojo:</label>
+            <select name="dojo" required>
+                {% for dojo in doj %}
+                <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
