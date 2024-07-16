@@ -12,13 +12,15 @@ class author(models.Model):
     notes = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    books = models.ManyToManyField(book,related_name='booking')
+    books = models.ManyToManyField(book,related_name='authors')
 
-def add_books(id):
-    this_book= book.objects.get(id=id)
-    this_author = author.objects.get(id=id)
-    au=this_author.books.add(this_book)
-    return au
+def add_books(author,book):
+    author.books.add(book)
+    return author
+
+def add_author(author , book):
+    book.authors.add(author)
+    return book
 
 def get_book(id):
       return book.objects.get(id=id)
@@ -26,6 +28,10 @@ def get_book(id):
 def get_author(id):
     return author.objects.get(id=id)
 
-def create(first_name,last_name,notes):
-    bb = author.objects.create(first_name = first_name ,last_name =last_name, notes=notes )
-    return bb
+def create_book(title , desc):
+    bk = book.objects.create(title = title , desc = desc)
+    return bk
+
+def create_author(first_name ,last_name ,notes ):
+    au = author.objects.create(first_name = first_name , last_name =last_name , notes =notes)
+    return au

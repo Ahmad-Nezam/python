@@ -17,15 +17,15 @@
         </tr>
        
         <tr>
-          {% for author in  au %}
+          {% for author in  authors %}
           <td>{{author.id}} </td>
           <td>{{author.first_name}} {{author.last_name}}</td>
-          <td><a href="add_bk\{{author.id}}">View</a></td>       
+          <td><a href="{% url 'author_info' author.id %}">View</a></td>       
         </tr>
-        {% endfor %}
+         {% endfor %}
       </table>
     <div>
-        <form method="post" action="{% url 'add_author' %}">
+        <form method="post" action="/add_author" >
             {% csrf_token %}
             <h1>Add a Author</h1>
             <label for="name">First_name:</label>

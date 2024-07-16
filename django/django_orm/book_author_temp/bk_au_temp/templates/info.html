@@ -9,18 +9,18 @@
 </head>
 <body>
     <ul>
-        <h1>Books</h1>
+       
     
         <h1>{{books.title}}</h1>
-        <p>Description: {{books.desc}}</p>
+        <p>Desc: {{books.desc}}</p>
         <h2>Authors</h2>
         <ul>
-            {% for author in authors %}
+            {% for author in book.authors.all %}
                 <li>{{ author.first_name }}</li>
             {% endfor %}
         </ul>
     </ul>
-    <form method="post" action="{% url 'add_au' %}">
+    <form method="post" action="{% url 'book_info' book.id %}">
     {% csrf_token %}
     <select name="bk" required>
         {% for author in authors %}

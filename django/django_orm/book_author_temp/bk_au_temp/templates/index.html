@@ -17,12 +17,13 @@
         </tr>
        
         <tr>
-          {% for book in  add_book %}
+          {% for book in  bks %}
           <td>{{book.id}} </td>
           <td>{{book.title}} </td>
-          <td><a href="add_bk\{{book.id}}">View</a></td>       
+          <td><a href="{% url 'book_info' book.id %}">View</a></td>       
         </tr>
          {% endfor %}
+
       </table>
     <div>
         <form method="post" action="{% url 'add_book' %}">
@@ -33,7 +34,7 @@
             <label for="city">Description:</label>
             <input type="text" id="desc" name="desc" required>
             <input type="submit" value="Add">
-            <a href="au">Go to Authors</a>
+            <a href="add_author/">Go to Authors</a>
         </form>
     </div>
 </body>

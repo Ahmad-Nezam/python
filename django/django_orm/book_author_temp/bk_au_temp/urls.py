@@ -3,12 +3,13 @@ from . import views
 urlpatterns = [
     
     
-     path('add_book/', views.create_book, name='add_book'),
-     path('add_bk/<int:bk_id>', views.index2 ,name='add_bk'),
+     path('', views.create_book, name='add_book'),
+
+     path('books/<book_id>', views.book_info ,name='book_info'),
 
      path('add_author/', views.create_author,  name='add_author'),
 
-     path('add_au/<int:au_id>', views.index2 ,name='add_au')
+     path('author/<au_id>', views.author_info ,name='author_info')
 
        ]
 
