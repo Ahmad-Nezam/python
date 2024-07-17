@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Show</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <form action="{% url 'update_detail' id=id %}" method="post">
+        {% csrf_token %}
+        <h1>Edit show : {{id}}</h1>
+        <label for="name">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="network">Network:</label>
+        <input type="text" id="network" name="network" required>
+        
+        <label for="release_date">Release Date:</label>
+        <input type="date" id="release_date" name="release_date" required><br><br><br>
+
+        <label for="desc">Description:</label>
+        <input type="text" id="desc" name="desc" required>
+
+        <input type="submit" value="Update">
+        
+    </form>
+    <a href="{% url 'read_up' id=id %}">Go to show</a>
+    
+</body>
+</html>
