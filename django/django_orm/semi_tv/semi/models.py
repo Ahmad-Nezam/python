@@ -10,7 +10,6 @@ class show_manager(models.Manager):
             errors['network'] = 'network should be at least 2 charcters'
         if len(postData['desc']) < 10:
             errors['desc'] = 'desc should be at least 10 charcters'    
-
         return errors        
 
 class tv_show(models.Model):

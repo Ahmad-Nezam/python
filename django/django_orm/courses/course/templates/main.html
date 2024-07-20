@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a student to all bootcamp courses</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %} 
+        <h1>Add a new course </h1>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="desc">Description:</label>
+        <input type="text" id="desc" name="desc" required>
+
+        <input type="submit" value="Add">
+    </form>
+    <table>
+       
+        <tr>
+            <th>Course name </th>
+            <th>Description</th>
+            <th>Date added</th>
+            <th>Actions</th>
+        </tr>
+        {% for courses in courses %}
+        <tr>
+          
+            <td>{{courses.name}}</td>
+            <td>{{courses.desc}}</td>
+            <td>{{courses.date}}</td>
+            
+        
+            <td> <a href="{% url 'delete_course' courses.id %}">remove</a> 
+              
+            </td>
+        </tr>
+        {% endfor %}
+       
+    </table>
+{% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
