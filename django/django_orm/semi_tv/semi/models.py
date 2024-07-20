@@ -1,19 +1,32 @@
 from django.db import models
-from django.shortcuts import get_object_or_404
+
+
+class show_manager(models.Manager):
+    def show_val(self , postData):
+        errors = {}
+        if len(postData['title']) < 2:
+            errors['title'] = 'title should be at least 2 charcters'
+        if len(postData['network']) < 3:
+            errors['network'] = 'network should be at least 2 charcters'
+        if len(postData['desc']) < 10:
+            errors['desc'] = 'desc should be at least 10 charcters'    
+
+        return errors        
 
 class tv_show(models.Model):
-    title = models.CharField(max_length=45)
+    title = models.CharField(max_length=45 )
     network = models.CharField(max_length=45)
     release_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     desc = models.TextField()
+    objects = show_manager()
 
 def __str__(self):
     return self.title    
 
 def create_show(title , network , release_date , desc ):
-    show = tv_show.objects.create(title = title , network = network , release_date =release_date , desc =desc  )
-    return show
+   return tv_show.objects.create(title = title , network = network , release_date =release_date , desc =desc  )
+   
 
 def read_show_all():
     return tv_show.objects.all()
