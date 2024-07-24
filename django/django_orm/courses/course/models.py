@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class show_manager(models.Manager):
     def show_val(self , postData):
         errors = {}
