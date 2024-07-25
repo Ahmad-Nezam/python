@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body> 
+    <h2><a href="/del">logout</a></h2>
+    <h3>Welcome {{First_name}}  {{Last_name}} </h3>
+    <form method="post" action="{% url 'add_book' %}">
+        {% csrf_token %} 
+        <h1>Add a favorite book</h1>
+        <label for="name">title:</label>
+        <input type="text"name="title" required>
+
+        <label for="Last name">desc:</label>
+        <input type="text" name="desc" required>
+        
+        <input type="submit" value="Add"> 
+    </form>  
+    {% for book in books %} 
+    <div>   
+        <h2><a href="{% url 'updated' book.id %}"> {{ book.title }} </a> </h2>
+        <p>{{ book.desc }}</p> 
+        <p>Added by : {{ book.uploaded_by.First_name }}</p>
+    </div>      
+    {% endfor %}  
+
+    
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</body>
+</html> 

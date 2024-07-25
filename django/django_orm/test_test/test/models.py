@@ -1,6 +1,7 @@
 from django.db import models
 import re	
 import bcrypt
+
 class UserManager(models.Manager):
     def val(self , postData ):
         errors = {}
@@ -20,10 +21,22 @@ class UserManager(models.Manager):
         if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern            
             errors['email'] = "Invalid email address!"
 
-        if len(postData['password']) != len(postData['conf_password']):
+        if len(postData['password']) !=  len(postData['conf_password']):
             errors['conf_password'] = "passwords do not match"
+            
+        if user.objects.filter(email=postData['email']).exists():
+            errors['email'] = "Email already exists."
 
-        return errors   
+        return errors 
+
+    def val_2(self , postData):
+        errors = {}
+        if len(postData['title']) < 2:
+           errors['title'] = 'title should be at least 2 charcters'
+
+        if len(postData['desc']) < 10:
+           errors['desc'] = 'desc should be at least 10 charcters' 
+        return errors 
 
 
 class user(models.Model):
@@ -32,9 +45,9 @@ class user(models.Model):
     email = models.CharField(max_length= 30)
     password = models.CharField(max_length=30)
     conf_password = models.CharField(max_length=30)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
-
 
 def create_user(request , pw_hash):
     First_name = request['First_name']
@@ -42,11 +55,5 @@ def create_user(request , pw_hash):
     email = request['email']
     password = request['password']
     conf_password = request['conf_password']
-    return user.objects.create(First_name = First_name , Last_name = Last_name , email = email ,  conf_password = pw_hash , password=pw_hash)
+    return user.objects.create(First_name = First_name , Last_name = Last_name , email = email ,  conf_password = pw_hash , password = pw_hash)
 
-def get_user():
-    return user.objects.all()
-
-def delete_user():
-    remove = user.objects.all()
-    remove.delete()

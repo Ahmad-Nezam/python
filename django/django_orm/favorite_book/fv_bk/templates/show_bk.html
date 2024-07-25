@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show book</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2><a href="/del">logout</a></h2>
+    <h2>Welcome {{First_name}}  {{Last_name}} </h2> 
+   
+   
+    <div> 
+        <h3>There and back again</h3>
+        <p>Added by: {{ books.uploaded_by.First_name }}</p> 
+        <h2>Added at : {{ books.created_at }}  </h2>
+        <p>Last updated : {{ books.updated_at }}</p>
+        
+    </div>  
+    
+    <form action="{% url 'update' books.id %}" method="post">
+        {% csrf_token %} 
+         <textarea name="desc">{{ books.desc }}</textarea>
+         <a href="{% url 'updated' books.id %}"> <input type="submit" value="Update"></a> 
+
+         
+    </form> 
+        <a href="{% url 'delete' books.id %}"> <input type="submit" value="Delete">  </a>
+    
+    
+
+</body>
+</html>  

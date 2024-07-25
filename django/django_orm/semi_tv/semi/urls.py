@@ -9,3 +9,5 @@ urlpatterns = [
     path('clear/<int:id>',views.delete_show,name='delete_detail')
     
            ]
+
+

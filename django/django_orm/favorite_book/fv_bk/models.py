@@ -1,6 +1,7 @@
 from django.db import models
 import re	
 import bcrypt
+
 class UserManager(models.Manager):
     def val(self , postData ):
         errors = {}
@@ -22,8 +23,20 @@ class UserManager(models.Manager):
 
         if len(postData['password']) != len(postData['conf_password']):
             errors['conf_password'] = "passwords do not match"
+            
+        if user.objects.filter(email=postData['email']).exists():
+            errors['email'] = "Email already exists."
 
-        return errors   
+        return errors 
+
+    def val_2(self , postData):
+        errors = {}
+        if len(postData['title']) < 2:
+           errors['title'] = 'title should be at least 2 charcters'
+
+        if len(postData['desc']) < 10:
+           errors['desc'] = 'desc should be at least 10 charcters' 
+        return errors 
 
 
 class user(models.Model):
@@ -32,8 +45,17 @@ class user(models.Model):
     email = models.CharField(max_length= 30)
     password = models.CharField(max_length=30)
     conf_password = models.CharField(max_length=30)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class book(models.Model):
+    title = models.CharField(max_length=30)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True) 
+    uploaded_by = models.ForeignKey(user , on_delete=models.CASCADE , related_name = 'book_uploaded' )
+    users_who_like = models.ManyToManyField(user , related_name = 'liked_books' ) 
 
 
 def create_user(request , pw_hash):
@@ -42,11 +64,24 @@ def create_user(request , pw_hash):
     email = request['email']
     password = request['password']
     conf_password = request['conf_password']
-    return user.objects.create(First_name = First_name , Last_name = Last_name , email = email ,  conf_password = pw_hash , password=pw_hash)
+    return user.objects.create(First_name = First_name , Last_name = Last_name , email = email ,  conf_password = pw_hash , password = pw_hash)
 
-def get_user():
-    return user.objects.all()
 
-def delete_user():
-    remove = user.objects.all()
-    remove.delete()
+def create_book(title , desc , user ): 
+    books = book.objects.create(title = title , desc = desc , uploaded_by = user) 
+    books.users_who_like.add(user)
+    return books
+
+def get_book(id):
+    return book.objects.get(id=id)
+   
+
+def update_book(id , desc ):
+    my_id = book.objects.get(id=id)
+    my_id.desc = desc 
+    my_id.save()
+    return my_id
+
+def delete_book(id):
+    bk = book.objects.get(id = id)
+    bk.delete() 
