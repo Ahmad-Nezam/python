@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body> 
+
+    <a href="{% url 'logout' %}">logout</a>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="{% url 'edit_pie' shows.id %}" method="post">
+        {% csrf_token %}  
+        <h1>Edit : {{shows.name}}</h1> 
+        <label for="name">name:</label> 
+        <input type="text"  name="name" > 
+
+        <label for="network">filling:</label>
+        <input type="text"  name="filling" >
+    
+        <label for="desc">crust:</label>
+        <input type="text" name="crust" >
+
+        <input type="submit" value="Update pie">
+        
+    </form>
+    <a href="{% url 'add_pie' %}">Back to my pies</a>
+ 
+  
+</body>
+</html>

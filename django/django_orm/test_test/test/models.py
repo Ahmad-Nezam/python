@@ -29,15 +29,6 @@ class UserManager(models.Manager):
 
         return errors 
 
-    def val_2(self , postData):
-        errors = {}
-        if len(postData['title']) < 2:
-           errors['title'] = 'title should be at least 2 charcters'
-
-        if len(postData['desc']) < 10:
-           errors['desc'] = 'desc should be at least 10 charcters' 
-        return errors 
-
 
 class user(models.Model):
     First_name = models.CharField(max_length=30)
@@ -49,6 +40,12 @@ class user(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
+class Pie(models.Model):
+    name = models.CharField(max_length=30)
+    filling = models.CharField(max_length=30)
+    crust = models.CharField(max_length=30)
+    bakery = models.ForeignKey(user , on_delete=models.CASCADE , related_name = 'bk')
+
 def create_user(request , pw_hash):
     First_name = request['First_name']
     Last_name = request['Last_name']
@@ -57,3 +54,26 @@ def create_user(request , pw_hash):
     conf_password = request['conf_password']
     return user.objects.create(First_name = First_name , Last_name = Last_name , email = email ,  conf_password = pw_hash , password = pw_hash)
 
+def add_pie(request):
+    name = request['name']
+    filling = request['filling'] 
+    crust = request['crust'] 
+    return Pie.objects.create(name = name , filling = filling , crust = crust)
+
+def get_all_pie():
+    return Pie.objects.all()
+
+def edit_pie(id , name ,crust , filling):
+    my_id = Pie.objects.get(id = id)
+    my_id.name = name
+    my_id.crust = crust
+    my_id.filling =filling
+    my_id.save()
+    return my_id
+
+def delete_pie(id):
+    shows = Pie.objects.get(id=id)
+    shows.delete()
+    
+def read_pie(id):
+    return Pie.objects.get(id=id)  

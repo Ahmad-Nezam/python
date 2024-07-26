@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veiw</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="{% url 'logout' %}">logout</a>
+    <h1>{{shows.name}}</h1>
+    <h2>By {{First_name}} </h2>
+    <h3>{{shows.filling}} and {{shows.crust}} </h3>
+
+    <a href="{% url 'add_pie' %}">Back to my pies</a>
+
+</body>
+</html>

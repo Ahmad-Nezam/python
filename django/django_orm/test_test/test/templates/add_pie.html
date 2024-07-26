@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="{% url 'logout' %}">logout</a>
+    <h1>welcome {{First_name}} {{Last_name}} </h1>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" action="{% url 'add_pie'   %}">
+        {% csrf_token %} 
+        <h1>Add a new pie </h1>
+        <label for="city">name :</label>
+        <input type="text" name="name" >
+
+        <label for="city">filling : </label>
+        <input type="text" name="filling" >
+
+        <label for="city">crust : </label>
+        <input type="text" name="crust" >
+
+        <input type="submit" value="Add pie">
+    </form>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for shows in show %}
+        <tr>
+
+            <td>{{shows.name}}</td>
+            <td>
+                 <a href="{% url 'edit_pie' shows.id %}">Edit</a> |
+                 <a href="{% url 'delete_pie' shows.id %}">Delete</a> |
+                 <a href="{% url 'all_pies' shows.id  %}">Go to all pies</a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+
+  
+  
+</body>
+</html>

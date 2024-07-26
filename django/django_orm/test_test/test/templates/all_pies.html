@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All pies</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="{% url 'logout' %}">logout</a>
+    <h1>All pies</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Backer</th>
+        </tr>
+        
+        <tr>
+       
+            <td> <a href="{% url 'show_pie' shows.id %}">
+                
+                {{shows.name}}  
+            
+            </a> </td>
+           
+            <td> {{First_name}} </td>
+
+        </tr>
+    </table>
+    <a href="{% url 'add_pie' %}">Back to my pies</a>
+</body>
+</html>

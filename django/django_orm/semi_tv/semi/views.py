@@ -39,7 +39,7 @@ def update_show(request ,id ):
                   messages.error(request , value)
                 return render(request , 'update.html' , {'id':id} )
         else : 
-
+            
             title = request.POST['title']
             network = request.POST['network']
             desc = request.POST['desc']
@@ -52,6 +52,7 @@ def update_show(request ,id ):
 def read_update(request,id):
     user = models.read_show(id=id)
     return render(request,'read.html',{'user' : user })
+
 
 def delete_show(request,id):
     models.delete_show(id = id)

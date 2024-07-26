@@ -44,7 +44,7 @@ def update(id,title,network,release_date,desc):
     my_id.release_date = release_date
     my_id.desc = desc
     my_id.save()
-    return my_id
+    return my_id 
 
     
 
